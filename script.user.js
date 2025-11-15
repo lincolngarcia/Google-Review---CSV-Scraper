@@ -88,11 +88,12 @@
         document.getElementById("gm-close-btn").style.display = "none"
         document.getElementById("gm-parse-btn").style.display = "none"
         document.getElementById("scraper_msg").style.display = "block"
-        setTimeout(() => {
+
+        function finishParsingAnimation() {
             document.getElementById("gm-parse-btn").style.display = "block"
             document.getElementById("gm-close-btn").style.display = "block"
             document.getElementById("scraper_msg").style.display = "none";
-        }, 1500);
+        }
 
         // Step 2: Find the relevant query parameter
         const regex_str = /!1s(0x[^!]*)/
@@ -214,6 +215,8 @@
             repeatRequests()
         ]);
 
+        finishParsingAnimation();
+
         const uncleanReviews = data.flatMap(x => x[2]);
         console.log(uncleanReviews);
 
@@ -226,12 +229,6 @@
         console.log(upload)
         if (upload == false) alert("something went wrong, please contact lincoln");
         else alert(`congraguations. ${reviews.length} reviews uploaded`);
-        // Don't do anytning here
-        // Step 5: Create a CSV blob
-        // Step 6: Import the data and download
-        //const name = document.URL.split("/")[5].replaceAll("+", "-");
-        //console.log(name)
-        //jsonToCsv(reviews, `${name}.csv`);
     }
 
     function jsonToCsv(jsonArray, fileName = 'output.csv') {
