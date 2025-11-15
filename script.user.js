@@ -193,7 +193,7 @@
                 // Data[2][i][0][2][0] is the rating
                 const rating = review[0][2][0][0];
                 // Data[2][i][0][2][15][0][0] description
-                if (review[0][2].length == 1) {
+                if (review[0][2].length < 16) {
                     return {"Full Name": (name ? name : "Anonymus"), Email: "google_email", rating, description:"", Business: "Untitled"}
                 }
 
