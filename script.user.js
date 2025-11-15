@@ -228,46 +228,8 @@
         const upload = await postReviews(businessID, reviews);
         console.log(upload)
         if (upload == false) alert("something went wrong, please contact lincoln");
-        else alert(`congraguations. ${reviews.length} reviews uploaded`);
+        else alert(`congragulations. ${reviews.length} reviews uploaded`);
     }
-
-    function jsonToCsv(jsonArray, fileName = 'output.csv') {
-        if (!jsonArray || !jsonArray.length) {
-            throw new Error("The JSON array is empty.");
-        }
-
-        // Get CSV headers from the keys of the first object
-        const headers = Object.keys(jsonArray[0]);
-        const csvRows = [];
-
-        // Add the header row
-        csvRows.push(headers.join(','));
-
-        // Add the data rows
-        for (const obj of jsonArray) {
-            const values = headers.map(header => {
-                const value = obj[header] !== undefined ? obj[header] : '';
-                // Escape double quotes by doubling them and wrap in quotes if needed
-                return `"${String(value).replace(/"/g, '""')}"`;
-            });
-            csvRows.push(values.join(','));
-        }
-
-        // Combine rows into a single CSV string
-        const csvString = csvRows.join('\n');
-
-        // Trigger file download in the browser
-        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-        const link = document.createElement('a');
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', fileName);
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
 
     function choiceAlert(message, choices) {
         return new Promise(resolve => {
